@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import PokemonList from "./components/PokemonList/PokemonList";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="w-full min-h-full flex justify-center bg-slate-300">
+      <section className="container flex flex-col items-center gap-14">
+        <header className="mt-16 py-4 px-12  bg-slate-50 rounded-xl drop-shadow-md">
+          <h1 className="font-bold text-3xl">Pokedex</h1>
+        </header>
+        <div className="w-full flex justify-between">
+          <div className="flex-1">
+            <PokemonList />
+          </div>
+
+          <div className="flex-1"></div>
+        </div>
+      </section>
+    </main>
   );
 }
 
