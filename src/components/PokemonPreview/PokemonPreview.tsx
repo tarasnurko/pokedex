@@ -1,6 +1,7 @@
-import { PokemonData } from "@/data/PokemonData";
-import React from "react";
+import { PokemonData, StatNames } from "@/data/PokemonData";
+import React, { useContext } from "react";
 import { useQuery } from "react-query";
+import { PokemonContext } from "src/context/PokemonContext";
 import { getPokemonPreview } from "src/fetch/getPokemonPreview";
 
 import PokemonType from "../PokemonType/PokemonType";
@@ -11,17 +12,51 @@ interface PokemonPreviewProps {
 }
 
 const PokemonPreview: React.FC<PokemonPreviewProps> = ({ url }) => {
+  const { pokemon, changePokemon } = useContext(PokemonContext);
+
   const { data, isLoading, isError } = useQuery<PokemonData>(
     ["pokemon", url],
     () => getPokemonPreview(url)
   );
 
-  console.log(data);
+  const findStat = (data: PokemonData, statName: StatNames): number => {
+    return (
+      data.stats.find((item) => item.stat.name === statName)?.base_stat || 0
+    );
+  };
+
+  const handleChosePokemon = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    if (isLoading || isError || !data) return;
+    changePokemon({
+      name: data.name,
+      id: data.id,
+      type: data.types.map((item) => item.type.name),
+      attack: findStat(data, "attack"),
+      defense: findStat(data, "defense"),
+      hp: findStat(data, "hp"),
+      spAttack: findStat(data, "special-attack"),
+      spDefense: findStat(data, "special-defense"),
+      speed: findStat(data, "speed"),
+      weight: data.weight,
+      totalMoves: data.moves.length,
+      sprites: {
+        ...data.sprites,
+      },
+    });
+  };
 
   return (
     <>
       {!isLoading && data && (
-        <div className="p-4 max-w-50 w-fit min-h-60] flex flex-col gap-4 items-center bg-slate-100 border border-gray-400 rounded-xl drop-shadow-md cursor-pointer">
+        <div
+          className={`p-4 max-w-[200px] w-full min-h-[260px] flex flex-col gap-4 items-center bg-slate-100 rounded-xl drop-shadow-md cursor-pointer ${
+            !pokemon || pokemon.id !== data.id
+              ? "border border-gray-400"
+              : "border-2 border-violet-500"
+          }`}
+          onClick={(event) => handleChosePokemon(event)}
+        >
           <img
             src={data.sprites.front_default || data.sprites.front_shiny}
             alt={data?.name.charAt(0).toUpperCase() + data?.name.slice(1)}
@@ -32,8 +67,9 @@ const PokemonPreview: React.FC<PokemonPreviewProps> = ({ url }) => {
               {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)}
             </h3>
             <div className="flex flex-wrap gap-2">
-              <PokemonType type="poison" />
-              <PokemonType type="electric" />
+              {data.types.map((type, index) => (
+                <PokemonType type={type.type.name} key={index} />
+              ))}
             </div>
           </div>
         </div>

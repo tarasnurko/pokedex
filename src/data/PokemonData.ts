@@ -1,6 +1,6 @@
 import { PokemonTypes } from "./PokemonTypes";
 
-type StatNames =
+export type StatNames =
   | "attack"
   | "defense"
   | "hp"
@@ -8,7 +8,7 @@ type StatNames =
   | "special-defense"
   | "speed";
 
-interface Stat {
+export interface Stat {
   base_stat: number;
   effort: number;
   stat: {
@@ -19,6 +19,7 @@ interface Stat {
 
 export interface PokemonData {
   name: string;
+  id: number;
   types: { slot: number; type: { name: PokemonTypes; url: string } }[];
   sprites: {
     front_default: string;
