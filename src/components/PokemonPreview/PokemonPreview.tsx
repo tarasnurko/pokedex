@@ -1,4 +1,5 @@
 import { PokemonData, StatNames } from "@/data/PokemonData";
+import { PokemonTypes } from "@/data/PokemonTypes";
 import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { PokemonContext } from "src/context/PokemonContext";
@@ -9,9 +10,13 @@ import PokemonPreviewSkeleton from "./PokemonPreviewSkeleton";
 
 interface PokemonPreviewProps {
   url: string;
+  filteredType: PokemonTypes | "all";
 }
 
-const PokemonPreview: React.FC<PokemonPreviewProps> = ({ url }) => {
+const PokemonPreview: React.FC<PokemonPreviewProps> = ({
+  url,
+  filteredType,
+}) => {
   const { pokemon, changePokemon } = useContext(PokemonContext);
 
   const { data, isLoading, isError } = useQuery<PokemonData>(
@@ -46,15 +51,25 @@ const PokemonPreview: React.FC<PokemonPreviewProps> = ({ url }) => {
     });
   };
 
+  const isPokemonChosen = (id: number): boolean => {
+    if (!pokemon || pokemon.id !== id) return false;
+
+    return true;
+  };
+
+  const showPokemon = (info: PokemonData): boolean =>
+    filteredType === "all" ||
+    info.types.some((item) => item.type.name === filteredType);
+
   return (
     <>
       {!isLoading && data && (
         <div
-          className={`p-4 w-full min-h-[260px] flex flex-col gap-4 items-center bg-slate-100 rounded-xl drop-shadow-md cursor-pointer ${
-            !pokemon || pokemon.id !== data.id
+          className={`p-4 w-full min-h-[260px] flex-col gap-4 items-center bg-slate-100 rounded-xl drop-shadow-md cursor-pointer ${
+            !isPokemonChosen(data.id)
               ? "border border-gray-400"
               : "border-2 border-violet-500"
-          }`}
+          } ${showPokemon(data) ? "flex" : "hidden"}`}
           onClick={(event) => handleChosePokemon(event)}
         >
           <img

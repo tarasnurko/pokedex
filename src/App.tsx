@@ -9,24 +9,22 @@ function App() {
   const { pokemon, changePokemon } = useContext(PokemonContext);
   const isPhone = useMediaQuery("(max-width: 640px)");
 
-  console.log(isPhone);
-
   const handleCloseModal = () => {
     changePokemon(null);
   };
 
   return (
-    <main className="relative p-10 w-full h-full flex justify-center bg-slate-300">
-      <section className="container flex flex-col items-center gap-14">
+    <main className="relative p-5 w-full h-full flex justify-center bg-slate-300">
+      <section className="container flex flex-col items-center gap-8">
         <header className="py-4 px-12  bg-slate-50 rounded-xl drop-shadow-md">
           <h1 className="font-bold text-3xl">Pokedex</h1>
         </header>
-        <div className="w-full flex justify-center sm:justify-between sm:gap-10 gap-0 overflow-hidden">
+        <div className="w-full h-full flex justify-center sm:justify-between sm:gap-10 gap-0 overflow-hidden">
           <div className="pr-2 flex-0 sm:flex-1 overflow-y-scroll scrollbar">
             <PokemonList />
           </div>
 
-          <div className="hidden flex-0 sm:flex-1 sm:flex justify-center items-center">
+          <div className="hidden flex-0 sm:flex-1 sm:flex justify-center items-center overflow-y-auto">
             {pokemon && <PokemonStats pokemon={pokemon} />}
           </div>
         </div>

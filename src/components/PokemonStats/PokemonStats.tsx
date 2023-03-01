@@ -37,7 +37,7 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({ pokemon }) => {
   };
 
   return (
-    <div className="p-4 w-[300px] min-h-[400px] flex flex-col gap-4 items-center bg-slate-100 rounded-xl drop-shadow-md cursor-pointer border border-gray-400">
+    <div className="p-4 w-[300px] min-h-[400px] max-h-full flex flex-col gap-4 items-center bg-slate-100 rounded-xl drop-shadow-md cursor-pointer border border-gray-400 overflow-y-auto scrollbar">
       <img
         src={pokemon.sprites.front_default || pokemon.sprites.front_shiny}
         alt={pokemon.name}
