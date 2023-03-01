@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
+import React from "react";
+import { useInfiniteQuery } from "react-query";
 import {
   getPokemonNames,
   GetPokemonNamesRes,
@@ -8,12 +8,6 @@ import PokemonPreview from "../PokemonPreview/PokemonPreview";
 import PokemonListSkeleton from "./PokemonListSkeleton";
 
 const PokemonList = () => {
-  // const [page, setPage] = useState(0);
-  // const { data, isLoading, isError } = useQuery<GetPokemonNamesRes>(
-  //   ["pokemonNames", page],
-  //   () => getPokemonNames({ limit: 12, offset: page * 12 })
-  // );
-
   const {
     data,
     isLoading,
@@ -45,7 +39,7 @@ const PokemonList = () => {
       {isLoading && <PokemonListSkeleton />}
       <div className="w-full flex flex-col items-center gap-8">
         {!isLoading && data && (
-          <div className="w-full grid grid-cols-3 gap-4">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 ld:grid-cols-3 gap-4">
             {data.pages.map((page) =>
               page.results.map((item) => (
                 <PokemonPreview url={item.url} key={item.name} />

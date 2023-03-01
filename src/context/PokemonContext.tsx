@@ -21,7 +21,7 @@ export interface ChosenPokemon {
 
 export interface PokemonContextType {
   pokemon: ChosenPokemon | null;
-  changePokemon: (newPokemon: ChosenPokemon) => void;
+  changePokemon: (newPokemon: ChosenPokemon | null) => void;
 }
 
 export const PokemonContext = createContext<PokemonContextType>({
@@ -32,11 +32,11 @@ export const PokemonContext = createContext<PokemonContextType>({
 const PokemonProvider = ({ children }: { children: React.ReactNode }) => {
   const [pokemon, setPokemon] = useState<ChosenPokemon | null>(null);
 
-  const changePokemon = (newPokemon: ChosenPokemon) => {
-    if (!pokemon || pokemon.id !== newPokemon.id) {
-      setPokemon(newPokemon);
-    } else {
+  const changePokemon = (newPokemon: ChosenPokemon | null) => {
+    if (!newPokemon || (pokemon && pokemon.id === newPokemon.id)) {
       setPokemon(null);
+    } else {
+      setPokemon(newPokemon);
     }
   };
 

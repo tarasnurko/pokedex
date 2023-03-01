@@ -1,5 +1,5 @@
 import React from "react";
-import { ChosenPokemon, PokemonContext } from "src/context/PokemonContext";
+import { ChosenPokemon } from "src/context/PokemonContext";
 
 interface PokemonStatsProps {
   pokemon: ChosenPokemon;
