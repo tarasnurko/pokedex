@@ -7,7 +7,7 @@ interface PokemonTypeProps {
 
 const PokemonType: React.FC<PokemonTypeProps> = ({ type }) => {
   const colors: { [key in PokemonTypes]: string } = {
-    bug: "text-gray-500 bg-green-400 hover:text-gray-700 hover:bg-green-200",
+    bug: "text-gray-700 bg-green-200 hover:text-gray-700 hover:bg-green-100",
     dark: "text-slate-100 bg-zinc-800 hover:bg-zinc-400",
     dragon:
       "text-slate-200 bg-indigo-600 hover:text-slate-100 hover:bg-indigo-900",
@@ -21,12 +21,12 @@ const PokemonType: React.FC<PokemonTypeProps> = ({ type }) => {
     flying: "text-slate-200 bg-cyan-600 hover:text-slate-200 hover:bg-cyan-700",
     ghost: "text-slate-200 bg-cyan-800 hover:text-slate-100 hover:bg-cyan-900",
     grass:
-      "text-neutral-900 bg-green-400 hover:text-neutral-700 hover:bg-green-300",
+      "text-slate-100 bg-green-400 hover:text-neutral-700 hover:bg-green-300",
     ground:
-      "text-neutral-700 bg-amber-500 hover:text-slate-200 hover:bg-amber-700",
+      "text-slate-100 bg-amber-500 hover:text-slate-200 hover:bg-amber-700",
     ice: "text-neutral-700 bg-teal-300 hover:text-slate-200 hover:bg-teal-700",
     normal:
-      "text-neutral-600 bg-slate-200 hover:text-neutral-700 hover:bg-slate-300",
+      "text-gray-600 bg-neutral-300 hover:text-neutral-700 hover:bg-slate-300",
     poison:
       "text-slate-100 bg-violet-600 hover:text-slate-700 hover:bg-violet-400",
     psychic:

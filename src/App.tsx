@@ -6,8 +6,6 @@ import { PokemonContext } from "./context/PokemonContext";
 function App() {
   const { pokemon } = useContext(PokemonContext);
 
-  console.log(pokemon);
-
   return (
     <main className="p-10 w-full h-full flex justify-center bg-slate-300">
       <section className="container flex flex-col items-center gap-14">

@@ -50,7 +50,7 @@ const PokemonPreview: React.FC<PokemonPreviewProps> = ({ url }) => {
     <>
       {!isLoading && data && (
         <div
-          className={`p-4 max-w-[200px] w-full min-h-[260px] flex flex-col gap-4 items-center bg-slate-100 rounded-xl drop-shadow-md cursor-pointer ${
+          className={`p-4 w-full min-h-[260px] flex flex-col gap-4 items-center bg-slate-100 rounded-xl drop-shadow-md cursor-pointer ${
             !pokemon || pokemon.id !== data.id
               ? "border border-gray-400"
               : "border-2 border-violet-500"
